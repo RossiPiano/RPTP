@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PoE Style Piano Skill Tree - TESTS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>📱 PoE Style Piano Skill Tree - TESTS</title>
     <style>
         * {
             margin: 0;
@@ -18,65 +18,68 @@
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            align-items: center;
-            padding: 10px;
+            align-items: flex-start;
+            padding: 6px;
+            overflow-x: hidden;
         }
 
         .app {
             width: 100%;
-            max-width: 1400px;
+            max-width: 480px;
             background: linear-gradient(145deg, #0d0d1a, #14142a);
-            border-radius: 20px;
-            padding: 20px;
+            border-radius: 16px;
+            padding: 12px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
             border: 1px solid #2a2a4a;
             display: flex;
             flex-direction: column;
-            gap: 15px;
-            min-height: 90vh;
+            gap: 10px;
+            min-height: 98vh;
         }
 
         /* TEST VERSION BANNER */
         .test-banner {
             background: #ff6b6b;
             color: #fff;
-            padding: 4px 12px;
+            padding: 4px 10px;
             text-align: center;
-            font-size: 12px;
+            font-size: 10px;
             border-radius: 4px;
-            margin-bottom: 5px;
             font-weight: 600;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
+            flex-shrink: 0;
         }
 
+        /* Header - Compact for phone */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-bottom: 12px;
+            padding-bottom: 8px;
             border-bottom: 2px solid #2a2a4a;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 6px;
+            flex-shrink: 0;
         }
 
         .header h1 {
-            font-size: 22px;
+            font-size: 16px;
             background: linear-gradient(135deg, #f7d94e, #f0a030);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-weight: 800;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
 
         .header .stats {
             display: flex;
-            gap: 15px;
+            gap: 10px;
             background: #0a0a12;
-            padding: 6px 14px;
-            border-radius: 10px;
+            padding: 4px 10px;
+            border-radius: 8px;
             border: 1px solid #2a2a4a;
-            flex-wrap: wrap;
-            font-size: 13px;
+            font-size: 11px;
+            align-items: center;
         }
 
         .header .stats span {
@@ -86,19 +89,20 @@
         .header .stats .value {
             color: #f7d94e;
             font-weight: 700;
-            font-size: 15px;
+            font-size: 13px;
         }
 
         .reset-btn {
             background: #2a1a1a;
             border: 1px solid #5a2a2a;
             color: #ff6b6b;
-            padding: 4px 12px;
+            padding: 3px 10px;
             border-radius: 6px;
             cursor: pointer;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 600;
             transition: all 0.2s;
+            flex-shrink: 0;
         }
 
         .reset-btn:hover {
@@ -106,31 +110,34 @@
             border-color: #ff6b6b;
         }
 
-        /* Main content - side by side (ALWAYS) */
+        /* Main content - Vertical for phone */
         .main-content {
             display: flex;
-            gap: 20px;
+            flex-direction: column;
+            gap: 10px;
             flex: 1;
             min-height: 0;
         }
 
+        /* Tree Wrapper - Takes most of the space */
         .tree-wrapper {
             flex: 1;
             overflow: auto;
-            padding: 10px;
+            padding: 8px;
             background: radial-gradient(ellipse at center, #0d0d20, #080812);
             border-radius: 12px;
             border: 1px solid #1a1a3a;
-            min-height: 500px;
+            min-height: 300px;
             position: relative;
+            -webkit-overflow-scrolling: touch;
         }
 
         .skill-tree {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 12px;
-            padding: 15px;
+            gap: 10px;
+            padding: 10px;
             min-width: fit-content;
             position: relative;
         }
@@ -147,69 +154,69 @@
 
         .connections-svg line {
             stroke: #2a2a5a;
-            stroke-width: 3;
+            stroke-width: 2.5;
             stroke-linecap: round;
         }
 
         .connections-svg line.active {
             stroke: #4a9eff;
-            stroke-width: 4;
+            stroke-width: 3;
         }
 
         .connections-svg line.mastered {
             stroke: #f7d94e;
-            stroke-width: 4;
+            stroke-width: 3;
             filter: drop-shadow(0 0 6px rgba(247, 217, 78, 0.3));
         }
 
         .skill-row {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 12px;
             flex-wrap: wrap;
             position: relative;
             z-index: 2;
         }
 
+        /* Skill Nodes - Smaller for phone */
         .skill-node {
             background: radial-gradient(ellipse at 30% 30%, #1a1a35, #0d0d20);
             border: 2px solid #2a2a5a;
             border-radius: 50%;
-            width: 70px;
-            height: 70px;
+            width: 56px;
+            height: 56px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             position: relative;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255,255,255,0.05);
             text-align: center;
-            padding: 4px;
+            padding: 3px;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
         }
 
-        .skill-node:hover {
-            transform: scale(1.12);
-            border-color: #f7d94e;
-            box-shadow: 0 0 30px rgba(247, 217, 78, 0.15), inset 0 1px 0 rgba(255,255,255,0.1);
-            z-index: 10;
+        .skill-node:active {
+            transform: scale(0.92);
         }
 
         .skill-node .icon {
-            font-size: 18px;
+            font-size: 16px;
             line-height: 1;
             margin-bottom: 1px;
         }
 
         .skill-node .name {
-            font-size: 7px;
+            font-size: 6px;
             font-weight: 700;
             color: #aaa;
             text-transform: uppercase;
             letter-spacing: 0.3px;
             line-height: 1.1;
-            max-width: 60px;
+            max-width: 48px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -217,14 +224,14 @@
 
         .skill-node .cost-badge {
             position: absolute;
-            bottom: -6px;
-            right: -6px;
+            bottom: -5px;
+            right: -5px;
             background: #1a1a3a;
             border: 1px solid #4a4a7a;
             border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            font-size: 8px;
+            width: 17px;
+            height: 17px;
+            font-size: 7px;
             font-weight: 700;
             color: #8888aa;
             display: flex;
@@ -234,14 +241,14 @@
 
         .skill-node .video-badge {
             position: absolute;
-            top: -6px;
-            right: -6px;
+            top: -5px;
+            right: -5px;
             background: #4a9eff;
             border: 1px solid #4a9eff;
             border-radius: 50%;
-            width: 18px;
-            height: 18px;
-            font-size: 8px;
+            width: 15px;
+            height: 15px;
+            font-size: 7px;
             font-weight: 700;
             color: #fff;
             display: flex;
@@ -251,25 +258,23 @@
 
         .skill-node .status-label {
             position: absolute;
-            bottom: -18px;
+            bottom: -16px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 7px;
+            font-size: 6px;
             font-weight: 700;
             white-space: nowrap;
             color: #555;
         }
 
         .skill-node.locked {
-            opacity: 0.6;
+            opacity: 0.5;
             filter: grayscale(0.5);
             cursor: pointer;
         }
 
-        .skill-node.locked:hover {
-            transform: scale(1.05);
-            border-color: #4a9eff;
-            box-shadow: 0 0 20px rgba(74, 158, 255, 0.1);
+        .skill-node.locked:active {
+            transform: scale(0.92);
         }
 
         .skill-node.unlocked {
@@ -285,7 +290,7 @@
         .skill-node.mastered {
             border-color: #f7d94e;
             background: radial-gradient(ellipse at 30% 30%, #2a2a1a, #1a1a0d);
-            box-shadow: 0 0 30px rgba(247, 217, 78, 0.15), inset 0 1px 0 rgba(247, 217, 78, 0.1);
+            box-shadow: 0 0 20px rgba(247, 217, 78, 0.15), inset 0 1px 0 rgba(247, 217, 78, 0.1);
             animation: pulse-mastered 2s ease-in-out infinite;
         }
 
@@ -295,35 +300,35 @@
 
         .skill-node.active {
             border-color: #ff6b6b;
-            box-shadow: 0 0 40px rgba(255, 107, 107, 0.2);
+            box-shadow: 0 0 30px rgba(255, 107, 107, 0.2);
         }
 
         @keyframes pulse-mastered {
-            0%, 100% { box-shadow: 0 0 20px rgba(247, 217, 78, 0.1); }
-            50% { box-shadow: 0 0 40px rgba(247, 217, 78, 0.25); }
+            0%, 100% { box-shadow: 0 0 15px rgba(247, 217, 78, 0.1); }
+            50% { box-shadow: 0 0 30px rgba(247, 217, 78, 0.2); }
         }
 
-        /* Video Panel - Right Side (ALWAYS) */
+        /* Video Panel - Bottom for phone */
         .video-panel {
-            width: 380px;
             flex-shrink: 0;
             background: #0a0a12;
             border-radius: 12px;
             border: 1px solid #2a2a4a;
-            padding: 16px;
+            padding: 10px 12px;
+            max-height: 160px;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
-            max-height: 600px;
-            overflow: hidden;
         }
 
         .video-panel .panel-header {
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 600;
             color: #f7d94e;
-            margin-bottom: 12px;
-            padding-bottom: 10px;
+            margin-bottom: 6px;
+            padding-bottom: 6px;
             border-bottom: 1px solid #2a2a4a;
+            flex-shrink: 0;
         }
 
         .video-panel .panel-header .skill-name {
@@ -336,12 +341,13 @@
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            padding-right: 4px;
+            gap: 5px;
+            padding-right: 2px;
+            -webkit-overflow-scrolling: touch;
         }
 
         .video-list::-webkit-scrollbar {
-            width: 4px;
+            width: 3px;
         }
         .video-list::-webkit-scrollbar-track {
             background: #0a0a12;
@@ -354,26 +360,27 @@
         .video-item-btn {
             background: #1a2a4a;
             border: 1px solid #4a9eff;
-            border-radius: 8px;
-            padding: 8px 14px;
+            border-radius: 6px;
+            padding: 5px 10px;
             color: #6ab0ff;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.15s;
             text-decoration: none;
-            font-size: 12px;
+            font-size: 11px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
         }
 
-        .video-item-btn:hover {
+        .video-item-btn:active {
+            transform: scale(0.98);
             background: #2a3a5a;
-            border-color: #6ab0ff;
-            transform: translateX(4px);
         }
 
         .video-item-btn .video-icon {
-            font-size: 16px;
+            font-size: 12px;
             flex-shrink: 0;
         }
 
@@ -385,75 +392,78 @@
         .video-item-btn .video-title {
             font-weight: 500;
             color: #eee;
+            font-size: 10px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
 
         .video-item-btn .video-channel {
-            font-size: 10px;
+            font-size: 8px;
             color: #8888aa;
             margin-top: 1px;
         }
 
         .video-item-btn .video-duration {
-            font-size: 10px;
+            font-size: 8px;
             color: #8888aa;
             background: #0a0a12;
-            padding: 2px 8px;
-            border-radius: 4px;
+            padding: 1px 6px;
+            border-radius: 3px;
             flex-shrink: 0;
         }
 
         .video-item-btn .play-icon {
             color: #4a9eff;
-            font-size: 16px;
+            font-size: 12px;
             flex-shrink: 0;
         }
 
         .no-videos {
             color: #555;
-            font-size: 13px;
-            padding: 20px 0;
+            font-size: 11px;
+            padding: 10px 0;
             text-align: center;
         }
 
         .no-videos .big-icon {
-            font-size: 32px;
+            font-size: 24px;
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
         }
 
         .hint-text {
             color: #444;
-            font-size: 10px;
+            font-size: 8px;
             text-align: center;
-            padding-top: 8px;
+            padding-top: 4px;
             border-top: 1px solid #1a1a2a;
-            margin-top: 8px;
+            margin-top: 4px;
+            flex-shrink: 0;
         }
 
-        /* Legend */
+        /* Legend - Compact for phone */
         .legend {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 12px;
             flex-wrap: wrap;
-            padding-top: 8px;
+            padding-top: 6px;
             border-top: 1px solid #2a2a4a;
+            flex-shrink: 0;
         }
 
         .legend-item {
             display: flex;
             align-items: center;
-            gap: 5px;
-            font-size: 10px;
+            gap: 4px;
+            font-size: 9px;
             color: #8888aa;
         }
 
         .legend-item .dot {
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             border: 2px solid;
         }
@@ -462,267 +472,60 @@
         .dot.unlocked { background: #1a4a7a; border-color: #4a9eff; }
         .dot.mastered { background: #7a6a1a; border-color: #f7d94e; }
 
-        /* ============================================================
-           RESPONSIVE - Video panel stays on right, nodes shrink
-           ============================================================ */
-
-        @media (max-width: 1024px) {
-            .video-panel {
-                width: 280px;
-                max-height: 500px;
-            }
-            .skill-node {
-                width: 60px;
-                height: 60px;
-            }
-            .skill-node .icon {
-                font-size: 16px;
-            }
-            .skill-node .name {
-                font-size: 6px;
-                max-width: 50px;
-            }
-            .skill-node .cost-badge {
-                width: 18px;
-                height: 18px;
-                font-size: 7px;
-                bottom: -5px;
-                right: -5px;
-            }
-            .skill-node .video-badge {
-                width: 16px;
-                height: 16px;
-                font-size: 7px;
-                top: -5px;
-                right: -5px;
-            }
-            .skill-row {
-                gap: 16px;
-            }
-            .video-item-btn {
-                font-size: 11px;
-                padding: 6px 10px;
-            }
+        /* Hide scrollbar on tree for cleaner look */
+        .tree-wrapper::-webkit-scrollbar {
+            width: 3px;
+        }
+        .tree-wrapper::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .tree-wrapper::-webkit-scrollbar-thumb {
+            background: #2a2a4a;
+            border-radius: 4px;
         }
 
-        @media (max-width: 768px) {
-            .app {
-                padding: 10px;
-                gap: 10px;
-                min-height: 95vh;
-            }
-            .header h1 {
-                font-size: 18px;
-            }
-            .header .stats {
-                font-size: 11px;
-                padding: 4px 10px;
-                gap: 10px;
-            }
-            .main-content {
-                gap: 10px;
-            }
-            .video-panel {
-                width: 200px;
-                max-height: 400px;
-                padding: 10px;
-            }
-            .video-panel .panel-header {
-                font-size: 12px;
-                margin-bottom: 8px;
-                padding-bottom: 6px;
-            }
-            .video-item-btn {
-                font-size: 10px;
-                padding: 4px 8px;
-                gap: 6px;
-            }
-            .video-item-btn .video-icon {
-                font-size: 12px;
-            }
-            .video-item-btn .video-duration {
-                font-size: 8px;
-                padding: 1px 4px;
-            }
-            .video-item-btn .video-title {
-                font-size: 10px;
-            }
-            .video-item-btn .video-channel {
-                font-size: 8px;
-            }
-            .skill-node {
-                width: 50px;
-                height: 50px;
-            }
-            .skill-node .icon {
-                font-size: 14px;
-            }
-            .skill-node .name {
-                font-size: 5px;
-                max-width: 40px;
-            }
-            .skill-node .cost-badge {
-                width: 14px;
-                height: 14px;
-                font-size: 6px;
-                bottom: -4px;
-                right: -4px;
-            }
-            .skill-node .video-badge {
-                width: 12px;
-                height: 12px;
-                font-size: 6px;
-                top: -4px;
-                right: -4px;
-            }
-            .skill-node .status-label {
-                font-size: 6px;
-                bottom: -16px;
-            }
-            .skill-row {
-                gap: 12px;
-            }
-            .legend-item {
-                font-size: 8px;
-            }
-            .legend-item .dot {
-                width: 8px;
-                height: 8px;
-            }
-            .no-videos {
-                font-size: 11px;
-                padding: 10px 0;
-            }
-            .no-videos .big-icon {
-                font-size: 24px;
-            }
-            .hint-text {
-                font-size: 8px;
-                padding-top: 4px;
-                margin-top: 4px;
-            }
-            .tree-wrapper {
-                min-height: 300px;
-            }
+        /* Very small phones */
+        @media (max-width: 380px) {
+            .app { padding: 8px; gap: 8px; }
+            .skill-node { width: 46px; height: 46px; }
+            .skill-node .icon { font-size: 14px; }
+            .skill-node .name { font-size: 5px; max-width: 38px; }
+            .skill-node .cost-badge { width: 14px; height: 14px; font-size: 6px; bottom: -4px; right: -4px; }
+            .skill-node .video-badge { width: 12px; height: 12px; font-size: 6px; top: -4px; right: -4px; }
+            .skill-row { gap: 8px; }
+            .header h1 { font-size: 14px; }
+            .header .stats { font-size: 9px; padding: 3px 8px; gap: 6px; }
+            .header .stats .value { font-size: 11px; }
+            .video-panel { max-height: 130px; padding: 8px; }
+            .video-item-btn { font-size: 9px; padding: 4px 8px; }
+            .video-item-btn .video-title { font-size: 9px; }
+            .tree-wrapper { min-height: 200px; padding: 4px; }
+            .skill-tree { padding: 6px; gap: 8px; }
+            .legend { gap: 8px; }
+            .legend-item { font-size: 7px; }
+            .legend-item .dot { width: 6px; height: 6px; }
+            .test-banner { font-size: 8px; padding: 3px 8px; }
         }
 
-        @media (max-width: 500px) {
-            .app {
-                padding: 6px;
-                gap: 6px;
-            }
-            .video-panel {
-                width: 140px;
-                max-height: 300px;
-                padding: 6px;
-            }
-            .video-panel .panel-header {
-                font-size: 10px;
-                margin-bottom: 4px;
-                padding-bottom: 4px;
-            }
-            .video-item-btn {
-                font-size: 8px;
-                padding: 3px 6px;
-                gap: 4px;
-                border-radius: 4px;
-            }
-            .video-item-btn .video-icon {
-                font-size: 10px;
-            }
-            .video-item-btn .video-duration {
-                font-size: 7px;
-                padding: 1px 3px;
-            }
-            .video-item-btn .video-title {
-                font-size: 8px;
-            }
-            .video-item-btn .video-channel {
-                font-size: 7px;
-            }
-            .video-item-btn .play-icon {
-                font-size: 10px;
-            }
-            .skill-node {
-                width: 40px;
-                height: 40px;
-                padding: 2px;
-            }
-            .skill-node .icon {
-                font-size: 12px;
-            }
-            .skill-node .name {
-                font-size: 4px;
-                max-width: 30px;
-            }
-            .skill-node .cost-badge {
-                width: 12px;
-                height: 12px;
-                font-size: 5px;
-                bottom: -3px;
-                right: -3px;
-            }
-            .skill-node .video-badge {
-                width: 10px;
-                height: 10px;
-                font-size: 5px;
-                top: -3px;
-                right: -3px;
-            }
-            .skill-node .status-label {
-                font-size: 5px;
-                bottom: -14px;
-            }
-            .skill-row {
-                gap: 8px;
-            }
-            .header h1 {
-                font-size: 14px;
-            }
-            .header .stats {
-                font-size: 9px;
-                padding: 3px 8px;
-                gap: 6px;
-            }
-            .header .stats .value {
-                font-size: 11px;
-            }
-            .reset-btn {
-                font-size: 9px;
-                padding: 2px 8px;
-            }
-            .tree-wrapper {
-                padding: 4px;
-                min-height: 200px;
-            }
-            .skill-tree {
-                padding: 8px;
-                gap: 8px;
-            }
-            .legend {
-                gap: 8px;
-                padding-top: 4px;
-            }
-            .legend-item {
-                font-size: 7px;
-                gap: 3px;
-            }
-            .legend-item .dot {
-                width: 6px;
-                height: 6px;
-            }
-            .no-videos {
-                font-size: 9px;
-                padding: 6px 0;
-            }
-            .no-videos .big-icon {
-                font-size: 18px;
-            }
-            .hint-text {
-                font-size: 7px;
-                padding-top: 3px;
-                margin-top: 3px;
-            }
+        /* Landscape phones - still vertical layout but smaller */
+        @media (max-height: 600px) and (orientation: landscape) {
+            .app { max-width: 100%; padding: 8px; gap: 6px; min-height: 96vh; }
+            .tree-wrapper { min-height: 150px; }
+            .skill-node { width: 42px; height: 42px; }
+            .skill-node .icon { font-size: 12px; }
+            .skill-node .name { font-size: 5px; max-width: 34px; }
+            .skill-node .cost-badge { width: 12px; height: 12px; font-size: 5px; bottom: -4px; right: -4px; }
+            .skill-node .video-badge { width: 10px; height: 10px; font-size: 5px; top: -4px; right: -4px; }
+            .skill-row { gap: 6px; }
+            .video-panel { max-height: 100px; padding: 6px 10px; }
+            .video-item-btn { font-size: 8px; padding: 3px 6px; }
+            .video-item-btn .video-title { font-size: 8px; }
+            .header h1 { font-size: 14px; }
+            .header .stats { font-size: 9px; padding: 2px 8px; }
+            .legend { padding-top: 4px; }
+            .legend-item { font-size: 7px; }
+            .test-banner { font-size: 8px; padding: 2px 8px; }
+            .skill-node .status-label { font-size: 5px; bottom: -14px; }
         }
     </style>
 </head>
@@ -731,7 +534,7 @@
 <div class="app">
     <!-- TEST VERSION BANNER -->
     <div class="test-banner">
-        🧪 TEST VERSION - Experimental features (not the live site)
+        📱 PHONE OPTIMIZED - Test Version
     </div>
 
     <!-- Header -->
@@ -740,11 +543,11 @@
         <div class="stats">
             <span>⭐ <span class="value" id="skill-points">0</span></span>
             <span>🔓 <span class="value" id="unlocked-count">0</span>/<span id="total-skills">0</span></span>
-            <button class="reset-btn" onclick="resetSkills()">⟳ Reset</button>
+            <button class="reset-btn" onclick="resetSkills()">⟳</button>
         </div>
     </div>
 
-    <!-- Main Content: Tree + Video Panel (ALWAYS side by side) -->
+    <!-- Main Content: Tree (top) + Video Panel (bottom) -->
     <div class="main-content">
         <!-- Skill Tree -->
         <div class="tree-wrapper">
@@ -753,7 +556,7 @@
             </div>
         </div>
 
-        <!-- Video Panel - Right Side (ALWAYS) -->
+        <!-- Video Panel - Bottom for phone -->
         <div class="video-panel" id="video-panel">
             <div class="panel-header">
                 📺 <span class="skill-name" id="panel-skill-name">Select a Skill</span>
@@ -761,10 +564,10 @@
             <div class="video-list" id="video-list">
                 <div class="no-videos">
                     <span class="big-icon">🎵</span>
-                    Click a skill node<br>to see YouTube tutorials
+                    Tap a skill node<br>to see YouTube tutorials
                 </div>
             </div>
-            <div class="hint-text">💡 Unlock or master a skill first, then click it</div>
+            <div class="hint-text">💡 Unlock or master a skill first, then tap it</div>
         </div>
     </div>
 
@@ -773,7 +576,7 @@
         <div class="legend-item"><span class="dot locked"></span> Locked</div>
         <div class="legend-item"><span class="dot unlocked"></span> Unlocked</div>
         <div class="legend-item"><span class="dot mastered"></span> Mastered</div>
-        <div class="legend-item" style="color:#555;">🎥 Click mastered/unlocked for YouTube links</div>
+        <div class="legend-item" style="color:#555;">🎥 Tap for videos</div>
     </div>
 </div>
 
@@ -986,6 +789,7 @@
                 html += `
                     <div class="skill-node ${statusClass}${selectedClass}"
                          onclick="handleSkillClick('${skill.id}')"
+                         ontouchstart=""
                          title="${skill.description}">
                         ${videoCount > 0 ? `<span class="video-badge">▶</span>` : ''}
                         <span class="icon">${skill.icon}</span>
@@ -999,7 +803,7 @@
         }
         container.innerHTML = html;
 
-        setTimeout(drawConnections, 50);
+        setTimeout(drawConnections, 100);
     }
 
     function drawConnections() {
@@ -1065,7 +869,7 @@
             videoList.innerHTML = `
                 <div class="no-videos">
                     <span class="big-icon">🎵</span>
-                    Click a skill node<br>to see YouTube tutorials
+                    Tap a skill node<br>to see YouTube tutorials
                 </div>
             `;
             return;
@@ -1134,9 +938,8 @@
         showVideos(null);
         setTimeout(drawConnections, 200);
         window.addEventListener('resize', () => setTimeout(drawConnections, 300));
-        console.log('⚡ PoE Style Piano Skill Tree loaded!');
-        console.log('💡 1-click to unlock → 1-click to master → click for YouTube videos');
-        console.log('📺 YouTube videos appear on the right panel (always)');
+        console.log('📱 Phone-optimized Piano Skill Tree loaded!');
+        console.log('💡 Tap to unlock → Tap to master → Tap for videos');
     }
 
     init();
