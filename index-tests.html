@@ -93,7 +93,7 @@
             border-color: #ff6b6b;
         }
 
-        /* Main content - side by side */
+        /* Main content - side by side (ALWAYS) */
         .main-content {
             display: flex;
             gap: 20px;
@@ -290,7 +290,7 @@
             50% { box-shadow: 0 0 40px rgba(247, 217, 78, 0.25); }
         }
 
-        /* Video Panel - Right Side */
+        /* Video Panel - Right Side (ALWAYS) */
         .video-panel {
             width: 380px;
             flex-shrink: 0;
@@ -449,43 +449,270 @@
         .dot.unlocked { background: #1a4a7a; border-color: #4a9eff; }
         .dot.mastered { background: #7a6a1a; border-color: #f7d94e; }
 
-        /* Responsive */
+        /* ============================================================
+           RESPONSIVE - Video panel stays on right, nodes shrink
+           ============================================================ */
+
+        /* Medium screens: Smaller video panel, smaller nodes */
         @media (max-width: 1024px) {
+            .video-panel {
+                width: 280px;
+                max-height: 500px;
+            }
+            .skill-node {
+                width: 60px;
+                height: 60px;
+            }
+            .skill-node .icon {
+                font-size: 16px;
+            }
+            .skill-node .name {
+                font-size: 6px;
+                max-width: 50px;
+            }
+            .skill-node .cost-badge {
+                width: 18px;
+                height: 18px;
+                font-size: 7px;
+                bottom: -5px;
+                right: -5px;
+            }
+            .skill-node .video-badge {
+                width: 16px;
+                height: 16px;
+                font-size: 7px;
+                top: -5px;
+                right: -5px;
+            }
+            .skill-row {
+                gap: 16px;
+            }
+            .video-item-btn {
+                font-size: 11px;
+                padding: 6px 10px;
+            }
+        }
+
+        /* Small screens: Even smaller, but still side-by-side */
+        @media (max-width: 768px) {
+            .app {
+                padding: 10px;
+                gap: 10px;
+                min-height: 95vh;
+            }
+            .header h1 {
+                font-size: 18px;
+            }
+            .header .stats {
+                font-size: 11px;
+                padding: 4px 10px;
+                gap: 10px;
+            }
             .main-content {
-                flex-direction: column;
+                gap: 10px;
             }
             .video-panel {
-                width: 100%;
-                max-height: 250px;
+                width: 200px;
+                max-height: 400px;
+                padding: 10px;
+            }
+            .video-panel .panel-header {
+                font-size: 12px;
+                margin-bottom: 8px;
+                padding-bottom: 6px;
+            }
+            .video-item-btn {
+                font-size: 10px;
+                padding: 4px 8px;
+                gap: 6px;
+            }
+            .video-item-btn .video-icon {
+                font-size: 12px;
+            }
+            .video-item-btn .video-duration {
+                font-size: 8px;
+                padding: 1px 4px;
+            }
+            .video-item-btn .video-title {
+                font-size: 10px;
+            }
+            .video-item-btn .video-channel {
+                font-size: 8px;
+            }
+            .skill-node {
+                width: 50px;
+                height: 50px;
+            }
+            .skill-node .icon {
+                font-size: 14px;
+            }
+            .skill-node .name {
+                font-size: 5px;
+                max-width: 40px;
+            }
+            .skill-node .cost-badge {
+                width: 14px;
+                height: 14px;
+                font-size: 6px;
+                bottom: -4px;
+                right: -4px;
+            }
+            .skill-node .video-badge {
+                width: 12px;
+                height: 12px;
+                font-size: 6px;
+                top: -4px;
+                right: -4px;
+            }
+            .skill-node .status-label {
+                font-size: 6px;
+                bottom: -16px;
+            }
+            .skill-row {
+                gap: 12px;
+            }
+            .legend-item {
+                font-size: 8px;
+            }
+            .legend-item .dot {
+                width: 8px;
+                height: 8px;
+            }
+            .no-videos {
+                font-size: 11px;
+                padding: 10px 0;
+            }
+            .no-videos .big-icon {
+                font-size: 24px;
+            }
+            .hint-text {
+                font-size: 8px;
+                padding-top: 4px;
+                margin-top: 4px;
             }
             .tree-wrapper {
-                min-height: 350px;
+                min-height: 300px;
             }
         }
 
-        @media (max-width: 768px) {
-            .app { padding: 10px; min-height: 95vh; }
-            .skill-node { width: 55px; height: 55px; }
-            .skill-node .icon { font-size: 14px; }
-            .skill-node .name { font-size: 6px; max-width: 45px; }
-            .skill-node .cost-badge { width: 16px; height: 16px; font-size: 7px; bottom: -5px; right: -5px; }
-            .skill-node .video-badge { width: 14px; height: 14px; font-size: 7px; top: -5px; right: -5px; }
-            .skill-row { gap: 12px; }
-            .header h1 { font-size: 18px; }
-            .header .stats { font-size: 11px; padding: 4px 10px; gap: 10px; }
-            .video-panel { max-height: 200px; padding: 12px; }
-            .video-item-btn { font-size: 11px; padding: 6px 10px; }
-        }
-
-        @media (max-width: 480px) {
-            .skill-node { width: 45px; height: 45px; padding: 2px; }
-            .skill-node .icon { font-size: 12px; }
-            .skill-node .name { font-size: 5px; max-width: 35px; }
-            .skill-node .cost-badge { width: 14px; height: 14px; font-size: 6px; bottom: -4px; right: -4px; }
-            .skill-node .video-badge { width: 12px; height: 12px; font-size: 6px; top: -4px; right: -4px; }
-            .skill-row { gap: 8px; }
-            .video-panel { max-height: 180px; padding: 10px; }
-            .video-item-btn { font-size: 10px; padding: 4px 8px; }
+        /* Very small screens: Keep side-by-side, tiny nodes */
+        @media (max-width: 500px) {
+            .app {
+                padding: 6px;
+                gap: 6px;
+            }
+            .video-panel {
+                width: 140px;
+                max-height: 300px;
+                padding: 6px;
+            }
+            .video-panel .panel-header {
+                font-size: 10px;
+                margin-bottom: 4px;
+                padding-bottom: 4px;
+            }
+            .video-item-btn {
+                font-size: 8px;
+                padding: 3px 6px;
+                gap: 4px;
+                border-radius: 4px;
+            }
+            .video-item-btn .video-icon {
+                font-size: 10px;
+            }
+            .video-item-btn .video-duration {
+                font-size: 7px;
+                padding: 1px 3px;
+            }
+            .video-item-btn .video-title {
+                font-size: 8px;
+            }
+            .video-item-btn .video-channel {
+                font-size: 7px;
+            }
+            .video-item-btn .play-icon {
+                font-size: 10px;
+            }
+            .skill-node {
+                width: 40px;
+                height: 40px;
+                padding: 2px;
+            }
+            .skill-node .icon {
+                font-size: 12px;
+            }
+            .skill-node .name {
+                font-size: 4px;
+                max-width: 30px;
+            }
+            .skill-node .cost-badge {
+                width: 12px;
+                height: 12px;
+                font-size: 5px;
+                bottom: -3px;
+                right: -3px;
+            }
+            .skill-node .video-badge {
+                width: 10px;
+                height: 10px;
+                font-size: 5px;
+                top: -3px;
+                right: -3px;
+            }
+            .skill-node .status-label {
+                font-size: 5px;
+                bottom: -14px;
+            }
+            .skill-row {
+                gap: 8px;
+            }
+            .header h1 {
+                font-size: 14px;
+            }
+            .header .stats {
+                font-size: 9px;
+                padding: 3px 8px;
+                gap: 6px;
+            }
+            .header .stats .value {
+                font-size: 11px;
+            }
+            .reset-btn {
+                font-size: 9px;
+                padding: 2px 8px;
+            }
+            .tree-wrapper {
+                padding: 4px;
+                min-height: 200px;
+            }
+            .skill-tree {
+                padding: 8px;
+                gap: 8px;
+            }
+            .legend {
+                gap: 8px;
+                padding-top: 4px;
+            }
+            .legend-item {
+                font-size: 7px;
+                gap: 3px;
+            }
+            .legend-item .dot {
+                width: 6px;
+                height: 6px;
+            }
+            .no-videos {
+                font-size: 9px;
+                padding: 6px 0;
+            }
+            .no-videos .big-icon {
+                font-size: 18px;
+            }
+            .hint-text {
+                font-size: 7px;
+                padding-top: 3px;
+                margin-top: 3px;
+            }
         }
     </style>
 </head>
@@ -502,7 +729,7 @@
         </div>
     </div>
 
-    <!-- Main Content: Tree + Video Panel -->
+    <!-- Main Content: Tree + Video Panel (ALWAYS side by side) -->
     <div class="main-content">
         <!-- Skill Tree -->
         <div class="tree-wrapper">
@@ -511,7 +738,7 @@
             </div>
         </div>
 
-        <!-- Video Panel - Right Side -->
+        <!-- Video Panel - Right Side (ALWAYS) -->
         <div class="video-panel" id="video-panel">
             <div class="panel-header">
                 📺 <span class="skill-name" id="panel-skill-name">Select a Skill</span>
@@ -894,7 +1121,7 @@
         window.addEventListener('resize', () => setTimeout(drawConnections, 300));
         console.log('⚡ PoE Style Piano Skill Tree loaded!');
         console.log('💡 1-click to unlock → 1-click to master → click for YouTube videos');
-        console.log('📺 YouTube videos appear on the right panel');
+        console.log('📺 YouTube videos appear on the right panel (always)');
     }
 
     init();
