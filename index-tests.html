@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PoE Style Piano Skill Tree</title>
+    <title>PoE Style Piano Skill Tree - TESTS</title>
     <style>
         * {
             margin: 0;
@@ -34,6 +34,19 @@
             flex-direction: column;
             gap: 15px;
             min-height: 90vh;
+        }
+
+        /* TEST VERSION BANNER */
+        .test-banner {
+            background: #ff6b6b;
+            color: #fff;
+            padding: 4px 12px;
+            text-align: center;
+            font-size: 12px;
+            border-radius: 4px;
+            margin-bottom: 5px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
 
         .header {
@@ -453,7 +466,6 @@
            RESPONSIVE - Video panel stays on right, nodes shrink
            ============================================================ */
 
-        /* Medium screens: Smaller video panel, smaller nodes */
         @media (max-width: 1024px) {
             .video-panel {
                 width: 280px;
@@ -493,7 +505,6 @@
             }
         }
 
-        /* Small screens: Even smaller, but still side-by-side */
         @media (max-width: 768px) {
             .app {
                 padding: 10px;
@@ -595,7 +606,6 @@
             }
         }
 
-        /* Very small screens: Keep side-by-side, tiny nodes */
         @media (max-width: 500px) {
             .app {
                 padding: 6px;
@@ -719,6 +729,11 @@
 <body>
 
 <div class="app">
+    <!-- TEST VERSION BANNER -->
+    <div class="test-banner">
+        🧪 TEST VERSION - Experimental features (not the live site)
+    </div>
+
     <!-- Header -->
     <div class="header">
         <h1>⚡ Piano Skill Web</h1>
