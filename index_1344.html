@@ -1,0 +1,1902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>📚 Faber Piano Adventures - Primer</title>
+    <style>
+        /* ============================================================
+           🎨 COLOR PALETTE - CUSTOMIZE HERE
+           ============================================================ */
+        :root {
+            --bg-body: #f5f0ea;
+            --bg-card: #ffffff;
+            --bg-item: #f0ece6;
+            --bg-item-hover: #e8e0d8;
+            --bg-video: #f5f0ea;
+            --bg-banner: #e8f0f5;
+            --bg-star: #ffffff;
+            --bg-input: #f5f0ea;
+            --border-main: #d5d8da;
+            --border-light: #e0e4e6;
+            --border-hover: #b0c8d8;
+            --border-active: #8ab8d0;
+            --text-primary: #4a5a6a;
+            --text-secondary: #7a8a9a;
+            --text-light: #aab8c0;
+            --text-banner: #3a5a6a;
+            --text-star: #c8c0b8;
+            --shadow-color: rgba(180, 170, 160, 0.15);
+            --radius-main: 24px;
+            --radius-small: 12px;
+
+            /* ============================================================
+               🎨 SECTION COLORS - Green / Blue / Red
+               ============================================================ */
+
+            /* --- BOOKS SECTION (Green) --- */
+            --books-accent: #5a9a6a;
+            --books-accent-dark: #3a7a4a;
+            --books-accent-light: #e8f5ea;
+            --books-accent-glow: rgba(90, 154, 106, 0.2);
+            --books-border: #a0c8aa;
+            --books-border-hover: #6aaa7a;
+            --books-bg-item: #eef5f0;
+            --books-bg-item-hover: #dce8e0;
+            --books-text: #3a6a4a;
+
+            /* --- SKILLS SECTION (Blue) --- */
+            --skills-accent: #6a9ab8;
+            --skills-accent-dark: #4a7a98;
+            --skills-accent-light: #e8f0f8;
+            --skills-accent-glow: rgba(106, 154, 184, 0.2);
+            --skills-border: #a0c0d8;
+            --skills-border-hover: #6a9ab8;
+            --skills-bg-item: #eef3f8;
+            --skills-bg-item-hover: #dce8f0;
+            --skills-text: #3a6a8a;
+
+            /* --- LEARNING MATERIALS SECTION (Red/YouTube) --- */
+            --materials-accent: #cc6a5a;
+            --materials-accent-dark: #aa4a3a;
+            --materials-accent-light: #f8ecea;
+            --materials-accent-glow: rgba(204, 106, 90, 0.2);
+            --materials-border: #e0b0a8;
+            --materials-border-hover: #cc6a5a;
+            --materials-bg-item: #f8f0ee;
+            --materials-bg-item-hover: #f0e0dc;
+            --materials-text: #8a4a3a;
+
+            /* ============================================================
+               🔤 FONT SIZES - ADJUST THESE VALUES
+               ============================================================ */
+            --font-app-title: 25px;
+            --font-section-title: 15px;
+            --font-placeholder: 14px;
+            --font-video-title: px;
+            --font-video-channel: 8px;
+            --font-video-duration: 8px;
+            --font-book-item: 12px;
+            --font-item: 12px;
+            --font-book-ref: 10px;
+            --font-star-label: 16px;
+            --font-reset-btn: 13px;
+
+            /* ============================================================
+               📐 LAYOUT SIZES - ADJUST THESE VALUES
+               ============================================================ */
+            --button-height: 36px;           /* Uniform height for all buttons */
+            --button-gap: 4px;               /* Gap between buttons */
+            --section-min-height: 44px;      /* Minimum height for scrollable areas */
+        }
+
+        /* ============================================================
+           END OF SETTINGS - STYLES BELOW
+           ============================================================ */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: var(--bg-body);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 8px;
+            overflow-x: hidden;
+        }
+
+        /* ===== MAIN APP ===== */
+        .app {
+            width: 100%;
+            max-width: 1400px;
+            background: var(--bg-card);
+            border-radius: var(--radius-main);
+            padding: 16px;
+            box-shadow: 0 20px 60px var(--shadow-color);
+            border: 2px solid var(--border-main);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: 98vh;
+            min-height: 98vh;
+            overflow: hidden;
+        }
+
+        /* ===== STICKY HEADER ===== */
+        .sticky-header {
+            flex-shrink: 0;
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            background: var(--bg-card);
+            border-radius: 0;
+            margin: -16px -16px 0 -16px;
+            padding: 16px 16px 4px 16px;
+        }
+
+        .sticky-header .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 6px;
+            flex-shrink: 0;
+            margin-bottom: 2px;
+        }
+
+        .sticky-header .header h1 {
+            font-size: var(--font-app-title);
+            background: linear-gradient(135deg, var(--skills-accent), var(--skills-accent-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        /* ===== HORIZONTAL LINE ===== */
+        .header-divider {
+            flex-shrink: 0;
+            height: 2px;
+            background: var(--border-main);
+            margin: 2px 0 0 0;
+            position: relative;
+            z-index: 5;
+        }
+
+        /* ============================================================
+           MAIN CONTENT - GRID LAYOUT FOR EQUAL HEIGHTS
+           ============================================================ */
+        .main-content {
+            display: flex;
+            gap: 14px;
+            flex: 1;
+            min-height: 0;
+            overflow: hidden;
+            padding-top: 4px;
+        }
+
+        /* LEFT COLUMN - Books & Skills */
+        .left-column {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            gap: 10px;
+            padding-top: 8px;
+        }
+
+        /* ============================================================
+           ALL SCROLLABLE CONTAINERS - SHARE THE SAME HEIGHT
+           ============================================================ */
+        .books-column,
+        .video-panel-content {
+            flex: 0 0 auto;
+            height: auto;
+            min-height: var(--section-min-height);
+            max-height: none;
+        }
+
+        /* Books and Learning Materials should be the same height */
+        .books-column .books-list,
+        .video-panel-content .video-list {
+            flex: 1;
+            overflow-y: auto;
+            min-height: 0;
+        }
+
+        /* Skills takes remaining space with same height management */
+        .skill-column {
+            flex: 1;
+            min-height: 0;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .skill-column .skill-list {
+            flex: 1;
+            overflow-y: auto;
+            min-height: 0;
+        }
+
+        /* ============================================================
+           BOOKS FRAME - GREEN THEME
+           ============================================================ */
+        .books-column {
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            margin-top: 0;
+            /* DEBUG: Light green background for Books container */
+            background: rgba(0, 255, 0, 0.05);
+            border: 1px solid rgba(0, 200, 0, 0.3);
+            border-radius: var(--radius-small);
+            padding: 4px;
+        }
+
+        .books-column .column-label {
+            font-size: var(--font-section-title);
+            font-weight: 600;
+            color: var(--books-accent-dark);
+            margin-bottom: 4px;
+            padding-left: 4px;
+            flex-shrink: 0;
+            letter-spacing: 0.5px;
+            /* DEBUG: Light yellow background for label */
+            background: rgba(255, 255, 0, 0.1);
+        }
+
+        .books-list {
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: var(--button-gap);
+            padding: 2px 0px;
+            min-height: 0;
+            /* DEBUG: Light green background for list */
+            background: rgba(0, 255, 0, 0.05);
+        }
+
+        .books-list::-webkit-scrollbar {
+            width: 4px;
+        }
+        .books-list::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .books-list::-webkit-scrollbar-thumb {
+            background: var(--books-border);
+            border-radius: 4px;
+        }
+
+        .book-item {
+            background: var(--books-bg-item);
+            border: 2px solid var(--books-border);
+            border-radius: var(--radius-small);
+            padding: 6px 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            height: var(--button-height);
+            min-height: var(--button-height);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: var(--font-book-item);
+            font-weight: 600;
+            color: var(--books-text);
+            flex-shrink: 0;
+            /* DEBUG: Bright green border for book item */
+            border-color: rgba(0, 200, 0, 0.5);
+            background: rgba(0, 200, 0, 0.08);
+        }
+
+        .book-item:hover {
+            border-color: var(--books-border-hover);
+            transform: translateX(4px);
+            background: var(--books-bg-item-hover);
+        }
+
+        .book-item:active {
+            transform: scale(0.98);
+        }
+
+        .book-item .icon {
+            font-size: calc(var(--font-book-item) + 4px);
+            flex-shrink: 0;
+            width: 28px;
+            text-align: center;
+        }
+
+        .book-item .name {
+            flex: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* ============================================================
+           SKILLS FRAME - BLUE THEME
+           ============================================================ */
+        .skill-column {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            min-height: 0;
+            padding-top: 0;
+            /* DEBUG: Light blue background for Skills container */
+            background: rgba(0, 0, 255, 0.03);
+            border: 1px solid rgba(0, 100, 255, 0.2);
+            border-radius: var(--radius-small);
+            padding: 4px;
+        }
+
+        .skill-column .column-label-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+            padding-left: 4px;
+            flex-shrink: 0;
+            /* DEBUG: Light cyan background for label wrapper */
+            background: rgba(0, 255, 255, 0.05);
+        }
+
+        .skill-column .column-label {
+            font-size: var(--font-section-title);
+            font-weight: 600;
+            color: var(--skills-accent-dark);
+            letter-spacing: 0.5px;
+        }
+
+        .skill-column .reset-btn-small {
+            background: var(--skills-bg-item);
+            border: 1px solid var(--skills-border);
+            color: var(--skills-text);
+            padding: 2px 10px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: var(--font-reset-btn);
+            font-weight: 600;
+            transition: all 0.2s;
+            flex-shrink: 0;
+            line-height: 1.4;
+            height: var(--button-height);
+        }
+
+        .skill-column .reset-btn-small:hover {
+            background: var(--skills-bg-item-hover);
+            border-color: var(--skills-border-hover);
+        }
+
+        .skill-column .reset-btn-small:active {
+            transform: scale(0.95);
+        }
+
+        .skill-list {
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: var(--button-gap);
+            padding: 2px 0px;
+            min-height: 0;
+            /* DEBUG: Light blue background for skill list */
+            background: rgba(0, 100, 255, 0.03);
+        }
+
+        .skill-list::-webkit-scrollbar {
+            width: 4px;
+        }
+        .skill-list::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .skill-list::-webkit-scrollbar-thumb {
+            background: var(--skills-border);
+            border-radius: 4px;
+        }
+
+        /* ============================================================
+           SKILL ITEM - BLUE THEME
+           ============================================================ */
+        .skill-item {
+            background: var(--skills-bg-item);
+            border: 2px solid var(--skills-border);
+            border-radius: var(--radius-small);
+            padding: 6px 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            height: var(--button-height);
+            min-height: var(--button-height);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            /* DEBUG: Light blue border for skill item */
+            border-color: rgba(0, 100, 255, 0.4);
+            background: rgba(0, 100, 255, 0.06);
+        }
+
+        .skill-item:active {
+            transform: scale(0.98);
+        }
+
+        .skill-item:hover {
+            border-color: var(--skills-border-hover);
+            transform: translateX(4px);
+            background: var(--skills-bg-item-hover);
+        }
+
+        .skill-item.active {
+            border-color: var(--skills-accent);
+            box-shadow: 0 0 20px var(--skills-accent-glow);
+            background: var(--skills-accent-light);
+        }
+
+        .skill-item .left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .skill-item .icon {
+            font-size: calc(var(--font-item) + 4px);
+            flex-shrink: 0;
+            width: 28px;
+            text-align: center;
+        }
+
+        .skill-item .name {
+            font-size: var(--font-item);
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.2;
+            white-space: nowrap;
+        }
+
+        .skill-item .book-ref {
+            font-size: var(--font-book-ref);
+            color: var(--skills-text);
+            font-weight: 400;
+            margin-left: 4px;
+        }
+
+        .skill-item .right {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            flex-shrink: 0;
+        }
+
+        /* ============================================================
+           LEARNING MATERIALS FRAME - RED/YOUTUBE THEME
+           ============================================================ */
+        .video-column {
+            width: 340px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            position: sticky;
+            top: 4px;
+            align-self: flex-start;
+            height: 100%;
+            max-height: 100%;
+            min-height: 200px;
+            overflow: hidden;
+            margin-top: 0;
+            z-index: 10;
+            padding-top: 0;
+            /* DEBUG: Light red background for video column */
+            background: rgba(255, 0, 0, 0.03);
+            border: 1px solid rgba(255, 0, 0, 0.2);
+            border-radius: var(--radius-small);
+            padding: 4px;
+        }
+
+        .video-column .column-label {
+            font-size: var(--font-section-title);
+            font-weight: 600;
+            color: var(--materials-accent-dark);
+            margin-bottom: 4px;
+            padding-left: 4px;
+            flex-shrink: 0;
+            letter-spacing: 0.5px;
+            /* DEBUG: Light pink background for label */
+            background: rgba(255, 0, 255, 0.05);
+        }
+
+        .video-panel-content {
+            flex: 1;
+            background: transparent;
+            border-radius: 0;
+            border: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            min-height: 0;
+            /* DEBUG: Light orange background for panel content */
+            background: rgba(255, 165, 0, 0.05);
+        }
+
+        .video-list {
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: var(--button-gap);
+            padding: 2px 0px;
+            min-height: 0;
+            /* DEBUG: Light red background for video list */
+            background: rgba(255, 0, 0, 0.03);
+        }
+
+        .video-list::-webkit-scrollbar {
+            width: 4px;
+        }
+        .video-list::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .video-list::-webkit-scrollbar-thumb {
+            background: var(--materials-border);
+            border-radius: 4px;
+        }
+
+        /* Video items styled exactly like book items */
+        .video-item-btn {
+            background: var(--materials-bg-item);
+            border: 2px solid var(--materials-border);
+            border-radius: var(--radius-small);
+            padding: 6px 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            height: var(--button-height);
+            min-height: var(--button-height);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: var(--font-book-item);
+            font-weight: 600;
+            color: var(--materials-text);
+            flex-shrink: 0;
+            text-decoration: none;
+            /* DEBUG: Light red border for video item */
+            border-color: rgba(255, 0, 0, 0.4);
+            background: rgba(255, 0, 0, 0.06);
+        }
+
+        .video-item-btn:hover {
+            border-color: var(--materials-border-hover);
+            transform: translateX(4px);
+            background: var(--materials-bg-item-hover);
+        }
+
+        .video-item-btn:active {
+            transform: scale(0.98);
+        }
+
+        .video-item-btn .video-icon {
+            font-size: calc(var(--font-book-item) + 4px);
+            flex-shrink: 0;
+            width: 28px;
+            text-align: center;
+            color: var(--materials-accent);
+        }
+
+        .video-item-btn .video-info {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .video-item-btn .video-title {
+            font-weight: 600;
+            color: var(--materials-text);
+            font-size: var(--font-book-item);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 1.2;
+        }
+
+        .video-item-btn .video-channel {
+            font-size: var(--font-video-channel);
+            color: var(--text-secondary);
+            font-weight: 400;
+            line-height: 1.2;
+        }
+
+        .video-item-btn .video-duration {
+            font-size: var(--font-video-duration);
+            color: var(--text-secondary);
+            background: var(--bg-card);
+            padding: 1px 6px;
+            border-radius: 4px;
+            flex-shrink: 0;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            font-weight: 400;
+        }
+
+        .video-item-btn .play-icon {
+            color: var(--materials-accent);
+            font-size: calc(var(--font-book-item) + 4px);
+            flex-shrink: 0;
+        }
+
+        .no-videos-placeholder {
+            color: var(--materials-accent);
+            font-size: var(--font-placeholder);
+            font-weight: 700;
+            text-align: left;
+            padding: 8px 0;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            line-height: 1.2;
+            padding-left: 4px;
+            /* DEBUG: Light yellow for placeholder */
+            background: rgba(255, 255, 0, 0.05);
+        }
+
+        /* ===== STAR CYCLER ===== */
+        .star-cycler {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            flex-shrink: 0;
+            background: var(--bg-star);
+            border-radius: 30px;
+            padding: 2px 12px;
+            border: 1px solid var(--skills-border);
+            min-width: 66px;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+            height: 28px;
+        }
+
+        .star-cycler:hover {
+            border-color: var(--skills-border-hover);
+            background: var(--skills-bg-item-hover);
+            transform: scale(1.02);
+        }
+
+        .star-cycler:active {
+            transform: scale(0.95);
+        }
+
+        .star-cycler .star-display {
+            font-size: var(--font-star-label);
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 1px;
+        }
+
+        .star-cycler .star-display .on {
+            color: var(--accent-gold);
+            text-shadow: 0 0 10px rgba(212, 184, 80, 0.2);
+        }
+
+        .star-cycler .star-display .off {
+            color: var(--text-star);
+        }
+
+        /* ============================================================
+           RESPONSIVE
+           ============================================================ */
+        @media (max-width: 820px) {
+            .app {
+                padding: 10px;
+                gap: 6px;
+                max-height: 98vh;
+                min-height: 98vh;
+            }
+
+            .sticky-header {
+                padding: 10px 10px 4px 10px;
+                margin: -10px -10px 0 -10px;
+            }
+
+            .header-divider {
+                margin: 2px 0 0 0;
+            }
+
+            .main-content {
+                flex-direction: column;
+                gap: 8px;
+                padding-top: 4px;
+            }
+
+            .left-column {
+                padding-top: 6px;
+                gap: 8px;
+                flex: none;
+            }
+
+            .video-column {
+                width: 100%;
+                flex-shrink: 0;
+                order: -1;
+                position: relative;
+                top: auto;
+                align-self: auto;
+                height: auto;
+                max-height: 200px;
+                min-height: 100px;
+                margin-top: 0;
+                padding-top: 0;
+            }
+
+            .video-column .video-panel-content {
+                flex: 1;
+                min-height: 0;
+            }
+
+            .books-column {
+                flex: 0 0 auto;
+                max-height: 120px;
+            }
+
+            .skill-column {
+                flex: 1;
+                min-height: 150px;
+            }
+
+            .sticky-header .header {
+                margin-bottom: 2px;
+            }
+
+            .video-column .column-label {
+                margin-bottom: 4px;
+            }
+
+            .video-item-btn {
+                padding: 4px 10px;
+                height: var(--button-height);
+                min-height: var(--button-height);
+            }
+
+            .video-item-btn .video-icon {
+                font-size: calc(var(--font-book-item) + 2px);
+                width: 20px;
+            }
+
+            .video-item-btn .video-duration {
+                padding: 1px 4px;
+                height: 14px;
+            }
+
+            .skill-column .column-label {
+                margin-bottom: 2px;
+            }
+
+            .skill-column .column-label-wrapper {
+                margin-bottom: 2px;
+                padding-left: 2px;
+            }
+
+            .skill-column .reset-btn-small {
+                padding: 1px 8px;
+                height: var(--button-height);
+            }
+
+            .books-column .column-label {
+                margin-bottom: 2px;
+            }
+
+            .book-item {
+                padding: 4px 10px;
+                height: var(--button-height);
+                min-height: var(--button-height);
+            }
+
+            .book-item .icon {
+                font-size: calc(var(--font-book-item) + 2px);
+                width: 20px;
+            }
+
+            .skill-item {
+                padding: 5px 10px;
+                height: var(--button-height);
+                min-height: var(--button-height);
+            }
+
+            .skill-item .icon {
+                font-size: calc(var(--font-item) + 2px);
+                width: 24px;
+            }
+
+            .star-cycler {
+                min-width: 56px;
+                padding: 1px 10px;
+                height: 24px;
+            }
+
+            .skill-list {
+                gap: var(--button-gap);
+                padding: 2px 0px;
+            }
+
+            .books-list {
+                padding: 2px 0px;
+                gap: var(--button-gap);
+            }
+
+            .video-list {
+                gap: var(--button-gap);
+                padding: 2px 0px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .app {
+                padding: 6px;
+                gap: 4px;
+                max-height: 98vh;
+                min-height: 98vh;
+            }
+
+            .sticky-header {
+                padding: 6px 6px 3px 6px;
+                margin: -6px -6px 0 -6px;
+            }
+
+            .header-divider {
+                margin: 2px 0 0 0;
+            }
+
+            .left-column {
+                padding-top: 4px;
+                gap: 6px;
+            }
+
+            .video-column {
+                height: auto;
+                max-height: 180px;
+                min-height: 80px;
+                padding: 0;
+                padding-top: 0;
+            }
+
+            .sticky-header .header {
+                margin-bottom: 2px;
+            }
+
+            .video-column .column-label {
+                margin-bottom: 4px;
+            }
+
+            .video-item-btn {
+                padding: 3px 8px;
+                height: var(--button-height);
+                min-height: var(--button-height);
+            }
+
+            .video-item-btn .video-icon {
+                font-size: calc(var(--font-book-item) + 2px);
+                width: 18px;
+            }
+
+            .skill-column .column-label {
+                margin-bottom: 2px;
+            }
+
+            .skill-column .column-label-wrapper {
+                margin-bottom: 2px;
+                padding-left: 2px;
+            }
+
+            .skill-column .reset-btn-small {
+                padding: 1px 6px;
+                height: var(--button-height);
+            }
+
+            .books-column .column-label {
+                margin-bottom: 2px;
+            }
+
+            .book-item {
+                padding: 3px 8px;
+                height: var(--button-height);
+                min-height: var(--button-height);
+            }
+
+            .book-item .icon {
+                font-size: calc(var(--font-book-item) + 2px);
+                width: 18px;
+            }
+
+            .skill-item {
+                padding: 4px 8px;
+                height: var(--button-height);
+                min-height: var(--button-height);
+                gap: 6px;
+            }
+
+            .skill-item .icon {
+                font-size: calc(var(--font-item) + 2px);
+                width: 20px;
+            }
+
+            .star-cycler {
+                min-width: 48px;
+                padding: 1px 8px;
+                height: 20px;
+            }
+
+            .video-item-btn .video-channel {
+                display: none;
+            }
+
+            .video-list {
+                gap: var(--button-gap);
+                padding: 2px 0px;
+            }
+
+            .skill-list {
+                gap: var(--button-gap);
+                padding: 2px 0px;
+            }
+
+            .books-list {
+                padding: 2px 0px;
+                gap: var(--button-gap);
+            }
+        }
+
+        /* Landscape phones */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .app {
+                max-height: 96vh;
+                min-height: 96vh;
+                padding: 6px;
+                gap: 4px;
+            }
+
+            .sticky-header {
+                padding: 4px 6px 2px 6px;
+                margin: -6px -6px 0 -6px;
+            }
+
+            .header-divider {
+                margin: 2px 0 0 0;
+            }
+
+            .left-column {
+                padding-top: 4px;
+                gap: 4px;
+            }
+
+            .video-column {
+                width: 100%;
+                flex-shrink: 0;
+                order: -1;
+                position: relative;
+                top: auto;
+                align-self: auto;
+                height: auto;
+                max-height: 150px;
+                min-height: 70px;
+                padding: 0;
+                padding-top: 0;
+            }
+
+            .sticky-header .header {
+                margin-bottom: 2px;
+            }
+
+            .video-column .column-label {
+                margin-bottom: 4px;
+            }
+
+            .video-item-btn {
+                padding: 2px 8px;
+                height: var(--button-height);
+                min-height: var(--button-height);
+            }
+
+            .video-item-btn .video-icon {
+                font-size: calc(var(--font-book-item) + 2px);
+                width: 16px;
+            }
+
+            .video-item-btn .video-channel {
+                display: none;
+            }
+
+            .video-item-btn .video-duration {
+                padding: 1px 3px;
+                height: 12px;
+            }
+
+            .skill-column .column-label {
+                margin-bottom: 2px;
+            }
+
+            .skill-column .column-label-wrapper {
+                margin-bottom: 2px;
+                padding-left: 2px;
+            }
+
+            .skill-column .reset-btn-small {
+                padding: 1px 6px;
+                height: var(--button-height);
+            }
+
+            .books-column .column-label {
+                margin-bottom: 2px;
+            }
+
+            .book-item {
+                padding: 2px 8px;
+                height: var(--button-height);
+                min-height: var(--button-height);
+            }
+
+            .book-item .icon {
+                font-size: calc(var(--font-book-item) + 2px);
+                width: 16px;
+            }
+
+            .skill-item {
+                padding: 3px 6px;
+                height: var(--button-height);
+                min-height: var(--button-height);
+                gap: 4px;
+            }
+
+            .skill-item .icon {
+                font-size: calc(var(--font-item) + 2px);
+                width: 18px;
+            }
+
+            .star-cycler {
+                min-width: 42px;
+                padding: 1px 8px;
+                height: 18px;
+            }
+
+            .skill-list {
+                gap: var(--button-gap);
+                padding: 2px 0px;
+            }
+
+            .books-list {
+                padding: 2px 0px;
+                gap: var(--button-gap);
+            }
+
+            .video-list {
+                gap: var(--button-gap);
+                padding: 2px 0px;
+            }
+
+            @media (min-width: 600px) {
+                .main-content {
+                    flex-direction: row;
+                }
+
+                .video-column {
+                    width: 200px;
+                    max-height: 100%;
+                    min-height: 120px;
+                    height: auto;
+                    order: 0;
+                    position: sticky;
+                    top: 4px;
+                    padding-top: 0;
+                }
+
+                .left-column {
+                    padding-top: 6px;
+                    flex: 1;
+                }
+
+                .video-item-btn .video-channel {
+                    display: block;
+                }
+
+                .video-item-btn {
+                    height: var(--button-height);
+                    min-height: var(--button-height);
+                }
+            }
+        }
+
+        @media (min-width: 600px) and (max-width: 820px) and (orientation: portrait) {
+            .video-column {
+                height: auto;
+                max-height: 200px;
+                min-height: 100px;
+                padding-top: 0;
+            }
+
+            .left-column {
+                padding-top: 6px;
+            }
+
+            .books-column {
+                max-height: 120px;
+            }
+
+            .video-item-btn {
+                height: var(--button-height);
+                min-height: var(--button-height);
+            }
+
+            .video-item-btn .video-channel {
+                display: block;
+            }
+
+            .skill-item {
+                height: var(--button-height);
+                min-height: var(--button-height);
+            }
+
+            .skill-item .icon {
+                font-size: calc(var(--font-item) + 2px);
+                width: 22px;
+            }
+
+            .star-cycler {
+                min-width: 56px;
+                height: 24px;
+            }
+        }
+
+        /* Desktop */
+        @media (min-width: 821px) {
+            .video-column {
+                position: sticky;
+                top: 4px;
+                align-self: flex-start;
+                height: 100%;
+                max-height: 100%;
+                min-height: 200px;
+                padding-top: 0;
+            }
+
+            .left-column {
+                padding-top: 8px;
+                gap: 10px;
+            }
+
+            .books-column {
+                max-height: none;
+                flex: 0 0 auto;
+                min-height: var(--section-min-height);
+            }
+
+            .no-videos-placeholder {
+                padding: 8px 0;
+                padding-left: 4px;
+            }
+
+            /* Ensure all scrollable areas share the same height */
+            .books-column,
+            .video-panel-content {
+                flex: 0 0 auto;
+                min-height: calc(var(--button-height) + 8px);
+            }
+
+            .books-list,
+            .video-list {
+                flex: 1;
+                overflow-y: auto;
+                min-height: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== MAIN APP ===== -->
+<div class="app" id="main-app">
+    <!-- ===== STICKY HEADER ===== -->
+    <div class="sticky-header">
+        <div class="header">
+            <h1>Piano App</h1>
+        </div>
+    </div>
+
+    <!-- ===== HORIZONTAL LINE ===== -->
+    <div class="header-divider"></div>
+
+    <!-- ===== SCROLLABLE MAIN CONTENT ===== -->
+    <div class="main-content">
+        <!-- LEFT COLUMN -->
+        <div class="left-column">
+            <!-- BOOKS FRAME - GREEN THEME -->
+            <div class="books-column">
+                <div class="column-label">📚 Books</div>
+                <div class="books-list" id="books-list">
+                    <div class="book-item">
+                        <span class="icon">📕</span>
+                        <span class="name">Faber - Piano Adventures - LESSON BOOK - PRIMER</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SKILLS FRAME - BLUE THEME -->
+            <div class="skill-column">
+                <div class="column-label-wrapper">
+                    <span class="column-label">📋 Skills</span>
+                    <button class="reset-btn-small" onclick="resetSkills()">⟳ Reset Stars</button>
+                </div>
+                <div class="skill-list" id="skill-list">
+                    <!-- Dynamically generated -->
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT COLUMN: Video Panel - RED/YOUTUBE THEME -->
+        <div class="video-column" id="video-column">
+            <div class="column-label">✏️ Learning Materials</div>
+            <div class="video-panel-content">
+                <div class="video-list" id="video-list">
+                    <div class="no-videos-placeholder">❗ Select a Book and a Skill below</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ============================================================
+    // 1. SKILL DATA - Faber Piano Adventures PRIMER Lesson Book
+    // ============================================================
+    const skillData = {
+        'sitting-piano': {
+            id: 'sitting-piano',
+            name: 'Sitting at Piano',
+            icon: '🪑',
+            description: 'Proper posture and sitting position',
+            bookRef: 'p. 4',
+            videos: [
+                { title: 'Piano Posture Guide', channel: 'Piano Lessons', duration: '8:23', url: 'https://www.youtube.com/watch?v=NpEaa2P7qZI' }
+            ]
+        },
+        'hand-shape': {
+            id: 'hand-shape',
+            name: 'Round Hand Shape',
+            icon: '🖐️',
+            description: 'Making a round hand shape for playing',
+            bookRef: 'p. 5',
+            videos: [
+                { title: 'Correct Piano Hand Position', channel: 'Piano Lessons', duration: '9:20', url: 'https://www.youtube.com/watch?v=NpEaa2P7qZI' }
+            ]
+        },
+        'finger-numbers': {
+            id: 'finger-numbers',
+            name: 'Finger Numbers',
+            icon: '✋',
+            description: 'Learn which finger is 1-5 on each hand',
+            bookRef: 'p. 6',
+            videos: [
+                { title: 'Piano Finger Numbers', channel: 'Piano Lessons', duration: '6:32', url: 'https://www.youtube.com/watch?v=NpEaa2P7qZI' },
+                { title: 'Two Black Ants', channel: 'Karen Rock Music', duration: '0:18', url: 'https://www.youtube.com/watch?v=GK6UxQ1EiZ8&t=30s' },
+                { title: 'Two Black Birds', channel: 'Karen Rock Music', duration: '0:15', url: 'https://www.youtube.com/watch?v=Lar1Y7GKoIE&t=30s' },
+                { title: 'Into the Cave', channel: 'Karen Rock Music', duration: '0:16', url: 'https://www.youtube.com/watch?v=FGlRHmZ1qLI&t=22s' },
+                { title: 'Three Little Kittens', channel: 'Karen Rock Music', duration: '0:16', url: 'https://www.youtube.com/watch?v=DmPjIDsMXwM&t=26s' }
+            ]
+        },
+        'quarter-note': {
+            id: 'quarter-note',
+            name: 'Quarter Note',
+            icon: '♩',
+            description: 'Understanding the quarter note',
+            bookRef: 'p. 14',
+            videos: [
+                { title: 'The Old Clock', channel: 'Karen Rock Music', duration: '10:22', url: 'https://www.youtube.com/watch?v=_2HfQgXRW9M' },
+                { title: 'The Walking Song', channel: 'Karen Rock Music', duration: '10:22', url: 'https://www.youtube.com/watch?v=UtD34biriEE' },
+                { title: 'Tightrope Walker', channel: 'Karen Rock Music', duration: '10:22', url: 'https://www.youtube.com/watch?v=3KhNEyMQjAM' }
+            ]
+        },
+        'half-note': {
+            id: 'half-note',
+            name: 'Half Note',
+            icon: '𝅗𝅥',
+            description: 'Understanding the half note',
+            bookRef: 'p. 18',
+            videos: [
+                { title: 'Half Notes Explained', channel: 'Music Theory', duration: '8:15', url: 'https://www.youtube.com/watch?v=yfoY53QX49I' }
+            ]
+        },
+        'forte-piano': {
+            id: 'forte-piano',
+            name: 'Forte vs Piano',
+            icon: '🔊',
+            description: 'Loud (forte) vs soft (piano) dynamics',
+            bookRef: 'p. 20',
+            videos: [
+                { title: 'Forte and Piano Dynamics', channel: 'Piano Lessons', duration: '7:40', url: 'https://www.youtube.com/watch?v=hdI2bqOjy3c' }
+            ]
+        },
+        'whole-note': {
+            id: 'whole-note',
+            name: 'Whole Note',
+            icon: '𝅝',
+            description: 'Understanding the whole note',
+            bookRef: 'p. 21',
+            videos: [
+                { title: 'Whole Notes Explained', channel: 'Music Theory', duration: '6:45', url: 'https://www.youtube.com/watch?v=qz0aGYrrlhU' }
+            ]
+        },
+        'repeat-sign': {
+            id: 'repeat-sign',
+            name: 'Repeat Sign',
+            icon: '🔁',
+            description: 'Understanding the repeat sign in music',
+            bookRef: 'p. 22',
+            videos: [
+                { title: 'Repeat Signs in Music', channel: 'Music Theory', duration: '9:30', url: 'https://www.youtube.com/watch?v=rfscVS0vtbw' }
+            ]
+        },
+        'cde-notes': {
+            id: 'cde-notes',
+            name: 'Learning C-D-E',
+            icon: '🎵',
+            description: 'Learn notes C, D, E on the staff',
+            bookRef: 'p. 25',
+            videos: [
+                { title: 'Piano Keys Explained', channel: 'Music Theory', duration: '10:15', url: 'https://www.youtube.com/watch?v=6EJ5VfIOfyQ' }
+            ]
+        },
+        'about-steps': {
+            id: 'about-steps',
+            name: 'About Steps',
+            icon: '⬆️',
+            description: 'Understanding musical steps (whole and half)',
+            bookRef: 'p. 26',
+            videos: [
+                { title: 'Steps in Music', channel: 'Piano Lessons', duration: '11:20', url: 'https://www.youtube.com/watch?v=5c6g-Ns-dOk' }
+            ]
+        },
+        'fgab-notes': {
+            id: 'fgab-notes',
+            name: 'Learning F-G-A-B',
+            icon: '🎵',
+            description: 'Learn notes F, G, A, B on the staff',
+            bookRef: 'p. 27',
+            videos: [
+                { title: 'Learn Piano Keys - Beginners Guide', channel: 'Piano Lessons', duration: '8:42', url: 'https://www.youtube.com/watch?v=5c6g-Ns-dOk' }
+            ]
+        },
+        'c-scale': {
+            id: 'c-scale',
+            name: 'C 5-Finger Scale',
+            icon: '🎶',
+            description: 'The C 5-finger scale pattern',
+            bookRef: 'p. 28',
+            videos: [
+                { title: 'C Major Scale Tutorial', channel: 'Piano Lessons', duration: '11:30', url: 'https://www.youtube.com/watch?v=PkZNo7MFNFg' }
+            ]
+        },
+        'the-measure': {
+            id: 'the-measure',
+            name: 'The Measure',
+            icon: '📏',
+            description: 'Understanding measures in music',
+            bookRef: 'p. 29',
+            videos: [
+                { title: 'Measures in Music', channel: 'Music Theory', duration: '7:15', url: 'https://www.youtube.com/watch?v=lC6nI-8n7mE' }
+            ]
+        },
+        'dynamic-marks': {
+            id: 'dynamic-marks',
+            name: 'Dynamic Marks',
+            icon: '🎛️',
+            description: 'Understanding dynamic markings in music',
+            bookRef: 'p. 30',
+            videos: [
+                { title: 'Dynamic Marks Explained', channel: 'Music Theory', duration: '12:30', url: 'https://www.youtube.com/watch?v=JJSoEo8JSnc' }
+            ]
+        },
+        'mezzo-forte': {
+            id: 'mezzo-forte',
+            name: 'Mezzo Forte',
+            icon: '🔉',
+            description: 'Medium loud (mezzo forte) dynamics',
+            bookRef: 'p. 30',
+            videos: [
+                { title: 'Mezzo Forte Explained', channel: 'Piano Lessons', duration: '9:45', url: 'https://www.youtube.com/watch?v=E8vH0r7jC9A' }
+            ]
+        },
+        'left-hand-position': {
+            id: 'left-hand-position',
+            name: 'F-G-A-B-C Left Hand',
+            icon: '🤚',
+            description: 'F-G-A-B-C position in left hand',
+            bookRef: 'p. 31',
+            videos: [
+                { title: 'Left Hand Position Guide', channel: 'Piano Lessons', duration: '14:20', url: 'https://www.youtube.com/watch?v=QBH6IpRkVDs' }
+            ]
+        },
+        'dotted-half-note': {
+            id: 'dotted-half-note',
+            name: 'Dotted Half Note',
+            icon: '𝅗𝅥.',
+            description: 'Understanding the dotted half note',
+            bookRef: 'p. 32',
+            videos: [
+                { title: 'Dotted Half Notes', channel: 'Music Theory', duration: '10:30', url: 'https://www.youtube.com/watch?v=qz0aGYrrlhU' }
+            ]
+        },
+        'the-staff': {
+            id: 'the-staff',
+            name: 'The Staff',
+            icon: '📜',
+            description: 'Understanding the musical staff',
+            bookRef: 'p. 34',
+            videos: [
+                { title: 'The Musical Staff', channel: 'Music Theory', duration: '13:15', url: 'https://www.youtube.com/watch?v=6EJ5VfIOfyQ' }
+            ]
+        },
+        'five-lines': {
+            id: 'five-lines',
+            name: '5 Lines, 4 Spaces',
+            icon: '📊',
+            description: 'The five lines and four spaces of the staff',
+            bookRef: 'p. 34',
+            videos: [
+                { title: 'Lines and Spaces', channel: 'Music Theory', duration: '12:45', url: 'https://www.youtube.com/watch?v=5c6g-Ns-dOk' }
+            ]
+        },
+        'line-space-notes': {
+            id: 'line-space-notes',
+            name: 'Line Notes, Space Notes',
+            icon: '📝',
+            description: 'Line notes vs space notes on the staff',
+            bookRef: 'p. 34',
+            videos: [
+                { title: 'Line and Space Notes', channel: 'Piano Lessons', duration: '11:30', url: 'https://www.youtube.com/watch?v=JJSoEo8JSnc' }
+            ]
+        },
+        'grand-staff': {
+            id: 'grand-staff',
+            name: 'The Grand Staff',
+            icon: '🎼',
+            description: 'Understanding the grand staff (treble + bass)',
+            bookRef: 'p. 34',
+            videos: [
+                { title: 'The Grand Staff Explained', channel: 'Music Theory', duration: '15:40', url: 'https://www.youtube.com/watch?v=E8vH0r7jC9A' }
+            ]
+        },
+        'clefs': {
+            id: 'clefs',
+            name: 'Bass & Treble Clef',
+            icon: '🎵',
+            description: 'Understanding bass clef and treble clef',
+            bookRef: 'p. 35',
+            videos: [
+                { title: 'Bass and Treble Clef', channel: 'Music Theory', duration: '14:20', url: 'https://www.youtube.com/watch?v=QBH6IpRkVDs' }
+            ]
+        },
+        'middle-c': {
+            id: 'middle-c',
+            name: 'Learning Middle C',
+            icon: '🎹',
+            description: 'Finding and playing Middle C',
+            bookRef: 'p. 36',
+            videos: [
+                { title: 'Middle C on Piano', channel: 'Piano Lessons', duration: '12:15', url: 'https://www.youtube.com/watch?v=YQHsXMglC9A' }
+            ]
+        },
+        'treble-g': {
+            id: 'treble-g',
+            name: 'Learning Treble G',
+            icon: '🎵',
+            description: 'Finding and playing Treble G',
+            bookRef: 'p. 37',
+            videos: [
+                { title: 'Treble G on Piano', channel: 'Piano Lessons', duration: '13:30', url: 'https://www.youtube.com/watch?v=JGwWNGJdvx8' }
+            ]
+        },
+        'treble-g-clef': {
+            id: 'treble-g-clef',
+            name: 'Treble = G Clef',
+            icon: '🎵',
+            description: 'Understanding that treble clef is also G clef',
+            bookRef: 'p. 40',
+            videos: [
+                { title: 'Treble Clef Explained', channel: 'Music Theory', duration: '11:45', url: 'https://www.youtube.com/watch?v=fHI8X4OXluQ' }
+            ]
+        },
+        'bass-f': {
+            id: 'bass-f',
+            name: 'Learning Bass F',
+            icon: '🎵',
+            description: 'Finding and playing Bass F',
+            bookRef: 'p. 40',
+            videos: [
+                { title: 'Bass F on Piano', channel: 'Piano Lessons', duration: '14:30', url: 'https://www.youtube.com/watch?v=CevxZvSJLk8' }
+            ]
+        },
+        'bass-f-clef': {
+            id: 'bass-f-clef',
+            name: 'Bass = F Clef',
+            icon: '🎵',
+            description: 'Understanding that bass clef is also F clef',
+            bookRef: 'p. 41',
+            videos: [
+                { title: 'Bass Clef Explained', channel: 'Music Theory', duration: '12:30', url: 'https://www.youtube.com/watch?v=6EJ5VfIOfyQ' }
+            ]
+        },
+        'def-notes': {
+            id: 'def-notes',
+            name: 'Learning D-E-F',
+            icon: '🎵',
+            description: 'Learn notes D, E, F on the staff',
+            bookRef: 'p. 42',
+            videos: [
+                { title: 'D-E-F Notes on Piano', channel: 'Piano Lessons', duration: '13:20', url: 'https://www.youtube.com/watch?v=5c6g-Ns-dOk' }
+            ]
+        },
+        'step-up-down': {
+            id: 'step-up-down',
+            name: 'Step Up vs Step Down',
+            icon: '⬆️⬇️',
+            description: 'Understanding step up vs step down in music',
+            bookRef: 'p. 43',
+            videos: [
+                { title: 'Steps Up and Down', channel: 'Piano Lessons', duration: '10:45', url: 'https://www.youtube.com/watch?v=lC6nI-8n7mE' }
+            ]
+        },
+        'time-signature-4-4': {
+            id: 'time-signature-4-4',
+            name: 'Time Signature (4/4)',
+            icon: '⏱️',
+            description: 'Understanding 4/4 time signature',
+            bookRef: 'p. 44',
+            videos: [
+                { title: '4/4 Time Signature', channel: 'Music Theory', duration: '14:15', url: 'https://www.youtube.com/watch?v=JJSoEo8JSnc' }
+            ]
+        },
+        'hand-shift': {
+            id: 'hand-shift',
+            name: 'Hand Shift',
+            icon: '🔄',
+            description: 'Shifting hand position on the keyboard',
+            bookRef: 'p. 45',
+            videos: [
+                { title: 'Hand Shifting Technique', channel: 'Piano Lessons', duration: '16:20', url: 'https://www.youtube.com/watch?v=E8vH0r7jC9A' }
+            ]
+        },
+        'learning-b': {
+            id: 'learning-b',
+            name: 'Learning B',
+            icon: '🎵',
+            description: 'Finding and playing B',
+            bookRef: 'p. 46',
+            videos: [
+                { title: 'B Note on Piano', channel: 'Piano Lessons', duration: '12:30', url: 'https://www.youtube.com/watch?v=QBH6IpRkVDs' }
+            ]
+        },
+        'time-signature-3-4': {
+            id: 'time-signature-3-4',
+            name: 'Time Signature (3/4)',
+            icon: '⏱️',
+            description: 'Understanding 3/4 time signature',
+            bookRef: 'p. 47',
+            videos: [
+                { title: '3/4 Time Signature', channel: 'Music Theory', duration: '13:45', url: 'https://www.youtube.com/watch?v=qz0aGYrrlhU' }
+            ]
+        },
+        'learning-a': {
+            id: 'learning-a',
+            name: 'Learning A',
+            icon: '🎵',
+            description: 'Finding and playing A',
+            bookRef: 'p. 48',
+            videos: [
+                { title: 'A Note on Piano', channel: 'Piano Lessons', duration: '11:50', url: 'https://www.youtube.com/watch?v=yfoY53QX49I' }
+            ]
+        },
+        'learning-g': {
+            id: 'learning-g',
+            name: 'Learning G',
+            icon: '🎵',
+            description: 'Finding and playing G',
+            bookRef: 'p. 50',
+            videos: [
+                { title: 'G Note on Piano', channel: 'Piano Lessons', duration: '13:10', url: 'https://www.youtube.com/watch?v=hdI2bqOjy3c' }
+            ]
+        },
+        'about-skips': {
+            id: 'about-skips',
+            name: 'About Skips',
+            icon: '⏭️',
+            description: 'Understanding skips in music',
+            bookRef: 'p. 52',
+            videos: [
+                { title: 'Skips in Music', channel: 'Piano Lessons', duration: '14:30', url: 'https://www.youtube.com/watch?v=rfscVS0vtbw' }
+            ]
+        },
+        'skip-up-down': {
+            id: 'skip-up-down',
+            name: 'Skip Up vs Skip Down',
+            icon: '⏭️⏮️',
+            description: 'Understanding skip up vs skip down',
+            bookRef: 'p. 51',
+            videos: [
+                { title: 'Skips Up and Down', channel: 'Piano Lessons', duration: '12:20', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' }
+            ]
+        },
+        'sustain-pedal': {
+            id: 'sustain-pedal',
+            name: 'Sustain Pedal',
+            icon: '🦶',
+            description: 'First time using the sustain pedal (Yankee Doodle)',
+            bookRef: 'p. 55',
+            videos: [
+                { title: 'Sustain Pedal Guide', channel: 'Piano Lessons', duration: '18:30', url: 'https://www.youtube.com/watch?v=YQHsXMglC9A' }
+            ]
+        },
+        'bass-d': {
+            id: 'bass-d',
+            name: 'Learning Bass D',
+            icon: '🎵',
+            description: 'Finding and playing Bass D',
+            bookRef: 'p. 56',
+            videos: [
+                { title: 'Bass D on Piano', channel: 'Piano Lessons', duration: '13:40', url: 'https://www.youtube.com/watch?v=JGwWNGJdvx8' }
+            ]
+        },
+        'bass-c': {
+            id: 'bass-c',
+            name: 'Learning Bass C',
+            icon: '🎵',
+            description: 'Finding and playing Bass C',
+            bookRef: 'p. 57',
+            videos: [
+                { title: 'Bass C on Piano', channel: 'Piano Lessons', duration: '14:15', url: 'https://www.youtube.com/watch?v=fHI8X4OXluQ' }
+            ]
+        },
+        'c-scale-bass': {
+            id: 'c-scale-bass',
+            name: 'C Scale in Bass Clef',
+            icon: '🎶',
+            description: 'C 5-Finger Scale in the Bass Clef',
+            bookRef: 'p. 58',
+            videos: [
+                { title: 'C Major Scale Bass Clef', channel: 'Piano Lessons', duration: '15:45', url: 'https://www.youtube.com/watch?v=CevxZvSJLk8' }
+            ]
+        },
+        'octave': {
+            id: 'octave',
+            name: 'The Octave',
+            icon: '8️⃣',
+            description: 'Understanding the octave',
+            bookRef: 'p. 59',
+            videos: [
+                { title: 'Octaves Explained', channel: 'Music Theory', duration: '14:30', url: 'https://www.youtube.com/watch?v=6EJ5VfIOfyQ' }
+            ]
+        },
+        'musical-question': {
+            id: 'musical-question',
+            name: 'Musical Question',
+            icon: '❓',
+            description: 'Understanding musical questions (phrases)',
+            bookRef: 'p. 63',
+            videos: [
+                { title: 'Musical Phrases and Questions', channel: 'Piano Lessons', duration: '16:20', url: 'https://www.youtube.com/watch?v=5c6g-Ns-dOk' }
+            ]
+        },
+        'parallel-answer': {
+            id: 'parallel-answer',
+            name: 'Parallel Answer',
+            icon: '🔄',
+            description: 'Understanding parallel answers in music',
+            bookRef: 'p. 63',
+            videos: [
+                { title: 'Parallel Answers in Music', channel: 'Music Theory', duration: '15:30', url: 'https://www.youtube.com/watch?v=lC6nI-8n7mE' }
+            ]
+        },
+        'contrasting-answer': {
+            id: 'contrasting-answer',
+            name: 'Contrasting Answer',
+            icon: '🔀',
+            description: 'Understanding contrasting answers in music',
+            bookRef: 'p. 63',
+            videos: [
+                { title: 'Contrasting Answers in Music', channel: 'Piano Lessons', duration: '16:45', url: 'https://www.youtube.com/watch?v=JJSoEo8JSnc' }
+            ]
+        },
+        'tie': {
+            id: 'tie',
+            name: 'The Tie',
+            icon: '🔗',
+            description: 'Understanding the tie in music notation',
+            bookRef: 'p. 64',
+            videos: [
+                { title: 'Ties in Music', channel: 'Music Theory', duration: '14:20', url: 'https://www.youtube.com/watch?v=E8vH0r7jC9A' }
+            ]
+        },
+        'damper-pedal': {
+            id: 'damper-pedal',
+            name: 'Damper Pedal',
+            icon: '🦶',
+            description: 'Holding down the damper pedal (right-foot pedal)',
+            bookRef: 'p. 67',
+            videos: [
+                { title: 'Damper Pedal Technique', channel: 'Piano Lessons', duration: '20:15', url: 'https://www.youtube.com/watch?v=QBH6IpRkVDs' }
+            ]
+        },
+        'quarter-rest': {
+            id: 'quarter-rest',
+            name: 'Quarter Rest',
+            icon: '𝄽',
+            description: 'Understanding the quarter rest',
+            bookRef: 'p. 68',
+            videos: [
+                { title: 'Quarter Rests Explained', channel: 'Music Theory', duration: '12:30', url: 'https://www.youtube.com/watch?v=qz0aGYrrlhU' }
+            ]
+        }
+    };
+
+    // ============================================================
+    // 2. APPLICATION STATE
+    // ============================================================
+    let selectedSkillId = null;
+    let skillStars = {};
+
+    for (const id of Object.keys(skillData)) {
+        skillStars[id] = 0;
+    }
+
+    // ============================================================
+    // 3. CORE FUNCTIONS
+    // ============================================================
+    function handleSkillClick(skillId) {
+        selectedSkillId = skillId;
+        renderAll();
+        showVideos(skillId);
+    }
+
+    function cycleStars(skillId, event) {
+        event.stopPropagation();
+        const current = skillStars[skillId] || 0;
+        skillStars[skillId] = (current + 1) % 4;
+        renderAll();
+        if (selectedSkillId === skillId) {
+            showVideos(skillId);
+        }
+    }
+
+    function resetSkills() {
+        if (confirm('Reset all star ratings to 0?')) {
+            for (const id of Object.keys(skillData)) {
+                skillStars[id] = 0;
+            }
+            renderAll();
+            if (selectedSkillId) {
+                showVideos(selectedSkillId);
+            }
+        }
+    }
+
+    // ============================================================
+    // 4. RENDER FUNCTIONS
+    // ============================================================
+    function renderList() {
+        const container = document.getElementById('skill-list');
+
+        let html = '';
+        for (const [id, skill] of Object.entries(skillData)) {
+            const isSelected = selectedSkillId === id;
+            const selectedClass = isSelected ? ' active' : '';
+            const starCount = skillStars[id] || 0;
+
+            let starDisplay = '';
+            for (let i = 0; i < 3; i++) {
+                const isOn = i < starCount;
+                starDisplay += `<span class="${isOn ? 'on' : 'off'}">${isOn ? '⭐' : '☆'}</span>`;
+            }
+
+            html += `
+                <div class="skill-item${selectedClass}"
+                     onclick="handleSkillClick('${id}')"
+                     ontouchstart=""
+                     title="${skill.description}">
+                    <div class="left">
+                        <span class="icon">${skill.icon}</span>
+                        <span class="name">
+                            ${skill.name}
+                            <span class="book-ref">${skill.bookRef || ''}</span>
+                        </span>
+                    </div>
+                    <div class="right">
+                        <span class="star-cycler" onclick="cycleStars('${id}', event)">
+                            <span class="star-display">${starDisplay}</span>
+                        </span>
+                    </div>
+                </div>
+            `;
+        }
+
+        container.innerHTML = html;
+    }
+
+    function showVideos(skillId) {
+        const videoList = document.getElementById('video-list');
+
+        if (!skillId || !skillData[skillId]) {
+            videoList.innerHTML = `<div class="no-videos-placeholder">❗ Select a Book and a Skill below</div>`;
+            return;
+        }
+
+        const skill = skillData[skillId];
+
+        if (!skill.videos || skill.videos.length === 0) {
+            videoList.innerHTML = `<div class="no-videos-placeholder">📖 No videos</div>`;
+            return;
+        }
+
+        let html = '';
+        for (const video of skill.videos) {
+            html += `
+                <a href="${video.url}" target="_blank" class="video-item-btn">
+                    <span class="video-icon">▶</span>
+                    <div class="video-info">
+                        <div class="video-title">${video.title}</div>
+                        <div class="video-channel">${video.channel}</div>
+                    </div>
+                    <span class="video-duration">${video.duration}</span>
+                    <span class="play-icon">↗</span>
+                </a>
+            `;
+        }
+        videoList.innerHTML = html;
+
+        // Scroll to top of video list when new videos are loaded
+        videoList.scrollTop = 0;
+    }
+
+    function renderAll() {
+        renderList();
+    }
+
+    // ============================================================
+    // 5. APP INITIALIZATION
+    // ============================================================
+    let appInitialized = false;
+
+    function initApp() {
+        if (appInitialized) return;
+        appInitialized = true;
+        renderAll();
+        showVideos(null);
+        console.log('📚 Faber Piano Adventures - Primer Lesson Book');
+        console.log('💡 ' + Object.keys(skillData).length + ' skills available');
+        console.log('🎨 Section Colors: Books=Green, Skills=Blue, Materials=Red');
+        console.log('📏 Button height: ' + getComputedStyle(document.documentElement).getPropertyValue('--button-height').trim());
+        console.log('📏 Section min height: ' + getComputedStyle(document.documentElement).getPropertyValue('--section-min-height').trim());
+    }
+
+    initApp();
+</script>
+
+</body>
+</html>
